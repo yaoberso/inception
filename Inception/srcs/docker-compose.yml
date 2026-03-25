@@ -5,10 +5,31 @@ services:
     env_file:
       - .env
     restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    restart: always
+    volumes:
+      - wp_data:/var/www/wordpress
 
   nginx:
     build: ./requirements/nginx
     container_name: nginx
     ports:
       - "443:443"
+    depends_on:
+      - wordpress
     restart: always
+    volumes:
+      - wp_data:/var/www/wordpress
+
+volumes:
+  wp_data:
+  db_data:
