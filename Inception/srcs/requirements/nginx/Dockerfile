@@ -9,7 +9,7 @@ RUN mkdir -p /etc/nginx/ssl
 
 # 4. On génère le certificat de sécurité auto-signé
 # (Le -subj permet de remplir automatiquement les questions posées par openssl comme le pays, la ville, etc.)
-RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=login"
+RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=CH/ST=VD/L=Lausanne/O=42/OU=42/CN=yaoberso.42.fr/UID=yaoberso"
 
 # 5. On crée le dossier qui va contenir les fichiers du site web
 RUN mkdir -p /var/www/wordpress

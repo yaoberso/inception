@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p /run/mysqld
+chown -R mysql:mysql /run/mysqld
 if [ ! -d "/var/lib/mysql/${SQL_DATABASE}" ]; then
 
     echo "Création du fichier d'initialisation SQL..."

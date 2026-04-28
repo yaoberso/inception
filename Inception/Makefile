@@ -4,6 +4,9 @@ COMPOSE = srcs/docker-compose.yml
 all: up
 
 up:
+	mkdir -p /home/yaoberso/data/mariadb
+	mkdir -p /home/yaoberso/data/wordpress
+	docker compose -f $(COMPOSE) up -d --build
 	docker	compose -f $(COMPOSE) up --build
 
 down:

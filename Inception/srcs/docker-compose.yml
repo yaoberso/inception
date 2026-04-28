@@ -5,6 +5,8 @@ services:
     env_file:
       - .env
     restart: always
+    networks:
+      - inception
     volumes:
       - db_data:/var/lib/mysql
 
@@ -16,6 +18,8 @@ services:
     depends_on:
       - mariadb
     restart: always
+    networks:
+      - inception
     volumes:
       - wp_data:/var/www/wordpress
 
@@ -27,9 +31,25 @@ services:
     depends_on:
       - wordpress
     restart: always
+    networks:
+      - inception
     volumes:
       - wp_data:/var/www/wordpress
 
+networks:
+  inception:
+    driver: bridge
+
 volumes:
   wp_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/yaoberso/data/wordpress
   db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/yaoberso/data/mariadb
