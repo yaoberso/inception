@@ -4,21 +4,20 @@ COMPOSE = srcs/docker-compose.yml
 all: up
 
 up:
-	mkdir -p /home/yaoberso/data/mariadb
-	mkdir -p /home/yaoberso/data/wordpress
+	mkdir -p $(HOME)/data/mariadb
+	mkdir -p $(HOME)/data/wordpress
 	docker compose -f $(COMPOSE) up -d --build
-	docker	compose -f $(COMPOSE) up --build
 
 down:
-	docker	compose -f $(COMPOSE) down
+	docker compose -f $(COMPOSE) down
 
 # Nettoie les conteneurs, les réseaux et surtout les VOLUMES créés par le projet
 clean:
-	docker	compose -f $(COMPOSE) down -v
+	docker compose -f $(COMPOSE) down -v
 
 # Le nettoyage nucléaire : supprime toutes les images Docker, les volumes et nettoie le système
 fclean: clean
-	docker	system prune -a --volumes -f
+	docker system prune -a --volumes -f
 
 # On efface tout et on recommence
 re: fclean all
