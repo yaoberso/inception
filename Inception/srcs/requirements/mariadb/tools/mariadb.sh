@@ -3,9 +3,7 @@
 mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld
 if [ ! -d "/var/lib/mysql/${SQL_DATABASE}" ]; then
-
-    echo "Création du fichier d'initialisation SQL..."
-    
+    echo "Création du fichier d'initialisation SQL..."   
     cat << EOF > /tmp/init.sql
 FLUSH PRIVILEGES;
 CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;
@@ -14,7 +12,6 @@ GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%';
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';
 FLUSH PRIVILEGES;
 EOF
-
     echo "Initialisation de la base de données..."
     mysqld --user=mysql --bootstrap < /tmp/init.sql
     
